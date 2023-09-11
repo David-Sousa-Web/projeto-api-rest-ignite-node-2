@@ -2,7 +2,6 @@ import { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { knex } from "../database";
 import { randomUUID } from "node:crypto";
-import { json } from "stream/consumers";
 
 export async function transactionsRoutes(app: FastifyInstance) {
   app.post("/", async (request, reply) => {
@@ -22,6 +21,6 @@ export async function transactionsRoutes(app: FastifyInstance) {
       amount: type === "credit" ? amount : amount * -1,
     });
 
-    reply.status(201).send();
+    return reply.status(201).send();
   });
 }
